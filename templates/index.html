@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Prediksi Berita Hoax</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body class="min-h-screen bg-gradient-to-b from-blue-900 via-blue-600 to-sky-400 flex items-center justify-center">
+
+    <div class="bg-white shadow-xl rounded-2xl p-8 w-full max-w-xl">
+        <h1 class="text-2xl font-bold text-center text-gray-800 mb-6">
+            Prediksi Berita Hoax & Valid
+        </h1>
+
+        <form method="POST" class="space-y-4">
+            <textarea
+                name="text"
+                rows="6"
+                required
+                placeholder="Masukkan teks berita di sini..."
+                class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none resize-none"
+            >{{ text }}</textarea>
+
+            <button
+                type="submit"
+                class="w-full bg-indigo-600 text-white py-2 rounded-lg font-semibold hover:bg-indigo-700 transition"
+            >
+                Prediksi
+            </button>
+        </form>
+
+        {% if prediction %}
+        <div class="mt-6 text-center">
+            <p class="text-lg font-semibold">
+                Hasil Prediksi:
+                {% if prediction == 'valid' %}
+                    <span class="text-green-600">VALID</span>
+                {% else %}
+                    <span class="text-red-600">HOAX</span>
+                {% endif %}
+            </p>
+
+            {% if confidence %}
+            <p class="text-sm text-gray-600 mt-1">
+                Tingkat Kepercayaan: {{ confidence }}%
+            </p>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+
+</body>
+</html>
+
